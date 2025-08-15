@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anadi Industries LLP</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+</head>
+<body>
+  <header>
+    <h1><img src="https://th.bing.com/th/id/OIP.JHX44yXsyf-UcqrJRlXICQAAAA?w=171&h=180&c=7&rs=1&pid=ImgDetMain"
+     alt="Logo"
+     style="height: 40px; margin-right: 10px; border-radius: 50%; box-shadow: 0 0 5px rgba(0,0,0,0.2);" />
+Anadi Industries LLP</h1>
+    <nav>
+      <button onclick="showSection('inventory')">Inventory</button>
+      <button onclick="showSection('orders')">Customer Orders</button>
+      <button onclick="showSection('summary')">Total Inventory Products</button>
+    </nav>
+  </header>
+
+  <!-- Inventory Section -->
+<section id="inventory" class="section">
+  <h2>Inventory Section</h2>
+  <form id="inventoryForm">
+    <select id="invProduct" required>
+      <option value="">Select Product</option>
+      <option value="Milk">Milk</option>
+      <option value="Chanch">Chanch</option>
+      <option value="Dahi">Dahi</option>
+      <option value="Ghee">Ghee</option>
+      <option value="White Butter">White Butter</option>
+      <option value="Paneer">Paneer</option>
+      <option value="Dhoop Batti">Dhoop Batti</option>
+      <option value="Sambrani Cup">Sambrani Cup</option>
+      <option value="Hawan Tikki">Hawan Tikki</option>
+      <option value="Choti Hawan Tikki">Choti Hawan Tikki</option>
+      <option value="Naseem Dhoop">Naseem Dhoop</option>
+    </select>
+    <!-- <input type="number" id="invQuantity" placeholder="Quantity" required /> -->
+    <input type="number" id="invQuantity" min="0.1" step="0.1" required>
+
+    <button type="submit">Add</button>
+  </form>
+  <table id="inventoryTable">
+    <thead>
+      <tr><th>Product</th><th>Quantity</th><th>Date & Time</th><th>Action</th></tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+  <button onclick="downloadInventoryExcel()" style="padding: 10px 16px; margin: 6px; border: none; border-radius: 8px; background-color: #198754; color: white; font-weight: 500; cursor: pointer; transition: 0.2s ease;">Download Excel</button>
+
+<button onclick="downloadInventoryPDF()" style="padding: 10px 16px; margin: 6px; border: none; border-radius: 8px; background-color: #0d6efd; color: white; font-weight: 500; cursor: pointer; transition: 0.2s ease;">Download PDF</button>
+
+<button onclick="clearInventory()" style="padding: 10px 16px; margin: 6px; border: none; border-radius: 8px; background-color: #dc3545; color: white; font-weight: 500; cursor: pointer; transition: 0.2s ease;">Clear Table</button>
+
+</section>
+
+<!-- Customer Orders Section -->
+<section id="orders" class="section">
+  <h2>Customer Orders</h2>
+  <form id="orderForm">
+    <input type="text" id="custName" placeholder="Customer Name" required />
+    <input type="tel" id="custPhone" placeholder="Phone Number" required />
+    <select id="orderProduct" required>
+      <option value="">Select Product</option>
+      <option value="Milk">Milk</option>
+      <option value="Chanch">Chanch</option>
+      <option value="Dahi">Dahi</option>
+      <option value="Ghee">Ghee</option>
+      <option value="White Butter">White Butter</option>
+      <option value="Paneer">Paneer</option>
+      <option value="Dhoop Batti">Dhoop Batti</option>
+      <option value="Sambrani Cup">Sambrani Cup</option>
+      <option value="Hawan Tikki">Hawan Tikki</option>
+      <option value="Choti Hawan Tikki">Choti Hawan Tikki</option>
+      <option value="Naseem Dhoop">Naseem Dhoop</option>
+    </select>
+    <input type="number" id="orderPrice" placeholder="Price" required />
+    <!-- <input type="number" id="orderQty" placeholder="Quantity" required /> -->
+     <input type="number" id="orderQty" min="0.1" step="0.01" required>
+
+    <button type="submit">Add Order</button>
+  </form>
+  <input
+  type="text"
+  id="searchCustomer"
+  placeholder="🔍 Search by Name / Phone"
+  oninput="searchOrder()"
+  style="width: 100%; max-width: 320px; padding: 10px 14px; border: 1px solid #ced4da; border-radius: 10px; font-size: 1rem; outline: none; box-shadow: 0 2px 6px rgba(0,0,0,0.05); transition: border-color 0.3s, box-shadow 0.3s;"
+  onfocus="this.style.borderColor='#0d6efd'; this.style.boxShadow='0 0 8px rgba(13,110,253,0.3)'"
+  onblur="this.style.borderColor='#ced4da'; this.style.boxShadow='0 2px 6px rgba(0,0,0,0.05)'"
+/>
+<br><br>
+  <table id="orderTable">
+    <thead>
+      <tr><th>Name</th><th>Phone</th><th>Product</th><th>Price</th><th>Quantity</th><th>Total</th><th>Date</th><th>Action</th></tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+ <button style="background-color: #198754; color: white; border: none; padding: 10px 16px; border-radius: 10px; margin: 5px; cursor: pointer;" onclick="downloadOrderExcel()">📊 Download Excel</button>
+
+<button style="background-color: #dc3545; color: white; border: none; padding: 10px 16px; border-radius: 10px; margin: 5px; cursor: pointer;" onclick="downloadOrderPDF()">📄 Download PDF</button>
+
+<button style="background-color: #f8f9fa; color: #212529; border: 1px solid #ced4da; padding: 10px 16px; border-radius: 10px; margin: 5px; cursor: pointer;" onclick="clearOrders()">🗑️ Clear Table</button>
+
+</section>
+
+
+  <!-- Summary Section -->
+  <section id="summary" class="section">
+    <h2>Total Inventory Products</h2>
+    <table id="summaryTable">
+      <thead>
+        <tr><th>Product</th><th>Total Inventory</th><th>Ordered</th><th>Remaining</th></tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <button onclick="downloadSummaryExcel()" style="padding: 10px 16px; margin: 6px; border: none; border-radius: 8px; background-color: #198754; color: white; font-weight: 500; cursor: pointer; transition: 0.2s ease;">Download Excel</button>
+
+<button onclick="downloadSummaryPDF()" style="padding: 10px 16px; margin: 6px; border: none; border-radius: 8px; background-color: #0d6efd; color: white; font-weight: 500; cursor: pointer; transition: 0.2s ease;">Download PDF</button>
+
+<button onclick="clearSummary()" style="padding: 10px 16px; margin: 6px; border: none; border-radius: 8px; background-color: #dc3545; color: white; font-weight: 500; cursor: pointer; transition: 0.2s ease;">Clear Table</button>
+
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>

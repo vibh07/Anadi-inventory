@@ -1,0 +1,240 @@
+/* style.css */
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to bottom right, #f8f9fa, #e0e0e0);
+  color: #333;
+}
+
+header {
+  background-color: #0d6efd;
+  color: #fff;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2rem;
+  letter-spacing: 1px;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+nav button {
+  background-color: #fff;
+  border: 2px solid #0d6efd;
+  color: #0d6efd;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+nav button:hover {
+  background-color: #0d6efd;
+  color: #fff;
+  transform: scale(1.05);
+}
+
+.section {
+  display: none;
+  padding: 1.5rem;
+  animation: fadeIn 0.3s ease-in;
+}
+
+.section.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  background-color: #ffffff;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+form input,
+form select,
+form button {
+  padding: 0.6rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ced4da;
+}
+
+form button {
+  background-color: #198754;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+form button:hover {
+  background-color: #157347;
+  transform: scale(1.03);
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="number"],
+select {
+  flex: 1 1 1px;
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+table th,
+table td {
+  border: 1px solid #dee2e6;
+  padding: 0.75rem;
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+table th {
+  background-color: #0d6efd;
+  color: white;
+}
+
+table td:last-child button {
+  padding: 0.3rem 0.6rem;
+  background-color: #dc3545;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+table td:last-child button:hover {
+  background-color: #a71d2a;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+  align-items: center;
+}
+
+.actions input[type="text"] {
+  flex: 1 1 200px;
+  padding: 0.6rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.actions button {
+  padding: 0.6rem 1.2rem;
+  background-color: #0d6efd;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.actions button:hover {
+  background-color: #084298;
+  transform: scale(1.05);
+}
+
+button.download {
+  background-color: #20c997;
+  font-weight: 600;
+}
+
+button.download:hover {
+  background-color: #138f75;
+}
+
+button.clear {
+  background-color: #ffc107;
+  color: #000;
+  font-weight: 600;
+}
+
+button.clear:hover {
+  background-color: #e0a800;
+}
+
+/* Media Query for Mobile */
+@media (max-width: 600px) {
+  nav {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  input[type="text"],
+  input[type="tel"],
+  input[type="number"],
+  select,
+  button {
+    width: 100%;
+  }
+
+  table th,
+  table td {
+    font-size: 0.85rem;
+  }
+
+  header h1 {
+    font-size: 1.5rem;
+  }
+
+  nav button {
+    width: 100%;
+  }
+
+  .section {
+    padding: 1rem 0.5rem;
+  }
+}
